@@ -6,19 +6,6 @@ import requests
 import json
 import time as t
 
-f = urlopen(link)
-myfile = f.read()
-print(myfile)
-x = str(myfile)
-x = x.split(' ')
-
-# kotel: 50, aku: 43
-kotel = x[50]
-aku = x[43].split('%')
-aku = aku[0]
-print("////////////////////////////////////////////////////")
-print(aku)
-print(kotel)
 
 
  
@@ -39,23 +26,28 @@ def pushbullet_noti(title, body):
         raise Exception('Error', resp.status_code)
     else:
         print('Message sent')
-
-kotelnaData = "KOTEL: " + kotel + "°C⚠!! ACCUM: " + aku + "%⚠!!"
+pushbullet_noti("⚠KOTELNA⚠", "script started successfully.")
+spatny = 0
 while(True):
+    t.sleep(30)
     f = urlopen(link)
     myfile = f.read()
-    print(myfile)
     x = str(myfile)
     x = x.split(' ')
     #list navigace:: kotel: 50, aku: 43
     kotel = x[50]
     aku = x[43].split('%')
     aku = aku[0]
-    print(aku)
-    print(kotel)
+    print("accu" + aku)
+    print("kotel" + kotel)
     i = 0
-    if(kotel >= 92 or aku >= 75):
+    kotelnaData = "KOTEL: " + kotel + "°C⚠!! ACCUM: " + aku + "%⚠!!"
+    if(float(kotel) >= 92.00 or float(aku) >= 75.00):
+        if(spatny == 1):
+            t.sleep(300)
+            spatny = 0
         while(i <= 3):
             pushbullet_noti("⚠KOTELNA⚠", kotelnaData)
-            t.sleep(0.3)
+            t.sleep(1)
             i = i + 1
+            spatny = 1
