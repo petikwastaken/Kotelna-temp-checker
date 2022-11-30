@@ -27,30 +27,6 @@ def pushbullet_noti(title, body):
     else:
         print('Message sent')
 pushbullet_noti("⚠KOTELNA⚠", "script started successfully.")
-spatny = 0
-while(True):
-    t.sleep(30)
-    f = urlopen(link)
-    myfile = f.read()
-    x = str(myfile)
-    x = x.split(' ')
-    #list navigace:: kotel: 50, aku: 43
-    kotel = x[50]
-    aku = x[43].split('%')
-    aku = aku[0]
-    print("accu" + aku)
-    print("kotel" + kotel)
-    i = 0
-    kotelnaData = "KOTEL: " + kotel + "°C⚠!! ACCUM: " + aku + "%⚠!!"
-    if(float(kotel) >= 92.00 or float(aku) >= 75.00):
-        if(spatny == 1):
-            t.sleep(300)
-            spatny = 0
-        while(i <= 3):
-            pushbullet_noti("⚠KOTELNA⚠", kotelnaData)
-            t.sleep(1)
-            i = i + 1
-            spatny = 1
 
 # Optimalizace CPU a Sítě
 def dataGet():
@@ -73,7 +49,7 @@ def kotelCheck():
         pass
     elif(latestDataKotel == 1 and float(kotel) >= limitKotel):
         iKotel = 0
-        latestDataAcc = 0
+        latestDataKotel = 0
         while(iKotel <= 1):
             iKotel = iKotel + 1
             kotelnaDataKotel = "KOTEL: " + kotel + "°C!!!⚠ Accum: " + aku + "%"
@@ -91,11 +67,10 @@ def accCheck():
             pushbullet_noti("⚠KOTELNA⚠", kotelnaDataAcc)
 
 def obojeCheck():
-    if(latestDataAcc == 1 and float(aku) >= limitAcc or float(kotel) >= limitKotel):
+    if(latestDataAcc == 1 and latestDataKotel == 1 and float(aku) >= limitAcc or float(kotel) >= limitKotel):
         iAcc = 0
         latestDataAcc = 0
         while(iAcc <= 1):
             iAcc = iAcc + 1
             kotelnaDataOboje = "Kotel: " + kotel + "°C ACCUM: " + aku + "%!!!⚠"
             pushbullet_noti("⚠KOTELNA⚠", kotelnaDataOboje)
-
