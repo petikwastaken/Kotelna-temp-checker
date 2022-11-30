@@ -98,4 +98,3 @@ def obojeCheck():
             iAcc = iAcc + 1
             kotelnaDataOboje = "Kotel: " + kotel + "°C ACCUM: " + aku + "%!!!⚠"
             pushbullet_noti("⚠KOTELNA⚠", kotelnaDataOboje)
-
