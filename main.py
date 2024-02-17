@@ -1,13 +1,13 @@
 import time as t
-t.sleep(20)
-
+t.sleep(20) # cekani nez se RPI pripoji k siti.
 from urllib.request import urlopen
 import os
-link = "http://213.108.160.85:666/"
+link = "http://ip:port/"
 # Import the following modules
 import requests
 import json
 from threading import Thread
+#Bezpecne limity
 limitKotel = float(93)
 limitAcc = float(85)
 
@@ -15,7 +15,7 @@ limitAcc = float(85)
 # Function to send Push Notification
 def pushbullet_noti(title, body):
  
-    TOKEN = 'o.f9BZI9VWMfn1BzKIU3PQHxIPdPKcNwxO'  # Pass your Access Token here
+    TOKEN = 'sampletext'  # Pass your Access Token here
     # Make a dictionary that includes, title and body
     msg = {"type": "note", "title": title, "body": body}
     # Sent a posts request
